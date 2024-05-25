@@ -1,12 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="app.js"></script>
     <title>Minesweeper</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body class="h-screen">
+    <nav class="bg-gray-100 py-4">
+      <div class="container mx-auto flex justify-between">
+        <h1>Minesweeper</h1>
+        <button
+          id="restartBtn"
+          class="bg-gray:100 hover:bg-gray-200 py-1 px-3 rounded-md"
+        >
+          Restart game
+        </button>
+      </div>
+    </nav>
+    <main class="container mx-auto relative">
+      <div
+        id="gameController"
+        class="flex flex-col gap-y-6 w-64 mx-auto bg-gray-100 p-5 rounded-lg"
+      >
+        <div>
+          <label for="difficulty" class="text-xs">Choose your difficulty</label>
+          <select name="difficulty" id="difficulty" class="w-full">
+            <option value="beginner" selected>Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
+        <button id="startBtn" class="rounded-md text-white bg-blue-400 py-2">
+          Start
+        </button>
+      </div>
+      <div id="gameView" class="container mx-auto"></div>
+    </main>
+  </body>
 </html>
