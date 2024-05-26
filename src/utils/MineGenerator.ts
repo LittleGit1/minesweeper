@@ -1,4 +1,4 @@
-import { BoardSettings } from "./types/Board";
+import { BoardSettings } from "../types/Board";
 
 export class MineGenerator {
   boardSettings: BoardSettings;
