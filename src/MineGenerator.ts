@@ -1,4 +1,5 @@
 import { BoardSettings } from "./types/Board";
+
 export class MineGenerator {
   boardSettings: BoardSettings;
   maxMines: number;
@@ -18,8 +19,28 @@ export class MineGenerator {
 
   fillMineArray() {
     this.mineMap = Array.from({ length: this.boardSettings.rows }, () =>
-      Array.from({ length: this.boardSettings.columns }, () => this.generateMine())
+      Array.from({ length: this.boardSettings.columns }, () =>
+        this.generateMine()
+      )
     );
+  }
+
+  destroyMineArray(){
+    this.mineMap = [];
+  }
+
+  resetGenerator(): void {
+    this.minesPlaced = 0;
+    this.iterationCount = 0;
+    this.destroyMineArray();
+    this.fillMineArray();
+  }
+
+  setBoardSettings(boardSettings: BoardSettings) {
+    this.boardSettings = boardSettings;
+    this.maxMines = this.boardSettings.boardMines;
+    this.gridCellCount = this.boardSettings.rows * this.boardSettings.columns;
+    this.resetGenerator();
   }
 
   getIndexValue(x: number, y: number): number {
