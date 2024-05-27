@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module" src="app.js"></script>
+    <script type="module" src="app.ts"></script>
     <title>Minesweeper</title>
   </head>
-  <body class="h-screen">
-    <nav class="bg-gray-100 py-4">
+  <body class="h-screen bg-gray-50">
+    <nav class="bg-gray-300 py-4">
       <div class="container mx-auto flex justify-between">
         <h1>Minesweeper</h1>
         <button
-          id="restartBtn"
+          id="resetGameButton"
           class="bg-gray:100 hover:bg-gray-200 py-1 px-3 rounded-md"
         >
           Restart game
@@ -20,23 +20,51 @@
       </div>
     </nav>
     <main class="container mx-auto relative">
-      <div
-        id="gameController"
-        class="flex flex-col gap-y-6 w-64 mx-auto bg-gray-100 p-5 rounded-lg"
-      >
-        <div>
-          <label for="difficulty" class="text-xs">Choose your difficulty</label>
-          <select name="difficulty" id="difficulty" class="w-full">
-            <option value="beginner" selected>Beginner</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="advanced">Advanced</option>
-          </select>
+      <div>
+        <div
+          id="headsUpDisplay"
+          class="flex justify-center gap-x-6 py-3 bg-gray-100 hidden rounded-xl"
+        >
+          <div class="bg-gray-600 rounded-xl p-3 flex gap-x-3">
+            <pre class="text-sm text-white self-center">mines</pre>
+            <code
+              id="minesRemaining"
+              class="text-[32px] w-[64px] text-red-600 bg-gray-400 leading-none rounded-xl px-3 py-2 text-center"
+              >0</code
+            >
+          </div>
+          <div class="bg-gray-600 rounded-xl p-3 flex gap-x-3">
+            <pre class="text-sm text-white self-center">time</pre>
+            <code
+              id="gameTimer"
+              class="text-[32px] w-[96px] text-red-600 bg-gray-400 leading-none rounded-xl px-3 py-2 text-center"
+              >0</code
+            >
+          </div>
         </div>
-        <button id="startBtn" class="rounded-md text-white bg-blue-400 py-2">
-          Start
-        </button>
+        <div id="minefield" class="mt-12"></div>
       </div>
-      <div id="gameView" class="container mx-auto"></div>
     </main>
+    <div
+      id="controls"
+      class="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] gap-y-6 w-64 mx-auto bg-gray-100 p-5 rounded-lg"
+    >
+      <div>
+        <label for="difficultySelect" class="text-xs"
+          >Choose your difficulty</label
+        >
+        <select name="difficulty" id="difficultySelect" class="w-full">
+          <option value="BEGINNER" selected>Beginner</option>
+          <option value="INTERMEDIATE">Intermediate</option>
+          <option value="ADVANCED">Advanced</option>
+        </select>
+      </div>
+      <button
+        id="startGameButton"
+        class="rounded-md text-white bg-blue-400 py-2"
+      >
+        Start
+      </button>
+    </div>
   </body>
 </html>
