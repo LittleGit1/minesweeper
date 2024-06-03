@@ -10,24 +10,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const onClickReset = () => game.onClickReset();
 
-  const difficultySelect = document.getElementById("difficultySelect");
-  if (!difficultySelect)
-    throw new Error(
-      "Required element with ID difficultySelect not found in the DOM."
-    );
+  const difficultySelect = document.getElementById(
+    "difficultySelect"
+  ) as HTMLElement;
   difficultySelect.addEventListener("change", onChangeDifficulty);
 
-  const startGameButton = document.getElementById("startGameButton");
-  if (!startGameButton)
-    throw new Error(
-      "Required element with ID startGameButton not found in the DOM."
-    );
+  const startGameButton = document.getElementById(
+    "startGameButton"
+  ) as HTMLElement;
   startGameButton.addEventListener("click", onClickStart);
 
-  const resetGameButton = document.getElementById("resetGameButton");
-  if (!resetGameButton)
-    throw new Error(
-      "Required element with ID resetGameButton not found in the DOM."
-    );
+  const resetGameButton = document.getElementById(
+    "resetGameButton"
+  ) as HTMLElement;
   resetGameButton.addEventListener("click", onClickReset);
 });

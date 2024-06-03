@@ -8,46 +8,47 @@
     <title>Minesweeper</title>
   </head>
   <body class="h-screen bg-gray-50">
-    <nav class="bg-gray-300 py-4">
+    <nav class="bg-cyan-800 py-4">
       <div class="container mx-auto flex justify-between">
-        <h1>Minesweeper</h1>
+        <h1 class="text-white font-medium text-2xl">Minesweeper</h1>
         <button
           id="resetGameButton"
-          class="bg-gray:100 hover:bg-gray-200 py-1 px-3 rounded-md"
+          class="text-white bg-cyan-800 hover:bg-cyan-600 transition-colors py-1 px-3 rounded-md"
         >
           Restart game
         </button>
       </div>
     </nav>
-    <main class="container mx-auto relative">
-      <div>
-        <div
-          id="headsUpDisplay"
-          class="flex justify-center gap-x-6 py-3 bg-gray-100 hidden rounded-xl"
-        >
-          <div class="bg-gray-600 rounded-xl p-3 flex gap-x-3">
-            <pre class="text-sm text-white self-center">mines</pre>
-            <code
-              id="minesRemaining"
-              class="text-[32px] w-[64px] text-red-600 bg-gray-400 leading-none rounded-xl px-3 py-2 text-center"
-              >0</code
-            >
-          </div>
-          <div class="bg-gray-600 rounded-xl p-3 flex gap-x-3">
-            <pre class="text-sm text-white self-center">time</pre>
-            <code
-              id="gameTimer"
-              class="text-[32px] w-[96px] text-red-600 bg-gray-400 leading-none rounded-xl px-3 py-2 text-center"
-              >0</code
-            >
-          </div>
+
+    <main>
+      <div
+        id="headsUpDisplay"
+        class="flex justify-center gap-x-6 py-3 bg-cyan-600 hidden"
+      >
+        <div class="bg-gray-600 rounded-xl p-3 flex gap-x-3">
+          <pre class="text-sm text-white self-center">mines</pre>
+          <code
+            id="minesRemaining"
+            class="text-[32px] w-[64px] text-red-600 bg-gray-400 leading-none rounded-xl px-3 py-2 text-center"
+            >0</code
+          >
         </div>
+        <div class="bg-gray-600 rounded-xl p-3 flex gap-x-3">
+          <pre class="text-sm text-white self-center">time</pre>
+          <code
+            id="gameTimer"
+            class="text-[32px] w-[96px] text-red-600 bg-gray-400 leading-none rounded-xl px-3 py-2 text-center"
+            >0</code
+          >
+        </div>
+      </div>
+      <div class="container mx-auto relative">
         <div id="minefield" class="mt-12"></div>
       </div>
     </main>
     <div
       id="controls"
-      class="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] gap-y-6 w-64 mx-auto bg-gray-100 p-5 rounded-lg"
+      class="absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] gap-y-6 w-64 mx-auto bg-gray-200 p-8 rounded-lg"
     >
       <div>
         <label for="difficultySelect" class="text-xs"
@@ -61,7 +62,7 @@
       </div>
       <button
         id="startGameButton"
-        class="rounded-md text-white bg-blue-400 py-2"
+        class="rounded-md text-white bg-cyan-800 py-2 w-full mt-4 text-white hover:bg-cyan-600 transition-colors"
       >
         Start
       </button>

@@ -1,6 +1,6 @@
 import Minefield from "./Minefield";
 import GameSettings from "./utils/GameSettings";
-import { GameTimer } from "./types/Game";
+import { GameTimer, Result } from "./types/Game";
 
 export default class Game {
   settings: GameSettings;
@@ -12,39 +12,17 @@ export default class Game {
   gameTimer: GameTimer;
 
   constructor() {
-    const view = document.getElementById("controls");
-    if (!view)
-      throw new Error(
-        "Required element with ID controls not found in the DOM."
-      );
-    this.controlView = view;
+    this.controlView = document.getElementById("controls") as HTMLElement;
+    this.minesRemainingView = document.getElementById("minesRemaining") as HTMLElement;
+    this.gameTimerView = document.getElementById("gameTimer") as HTMLElement;
+    this.headsUpDisplay = document.getElementById("headsUpDisplay") as HTMLElement;
 
-    const minesRemaining = document.getElementById("minesRemaining");
-    if (!minesRemaining)
-      throw new Error(
-        "Required element with ID minesRemaining not found in the DOM."
-      );
-    this.minesRemainingView = minesRemaining;
 
-    const gameTimerView = document.getElementById("gameTimer");
-    if (!gameTimerView)
-      throw new Error(
-        "Required element with ID gameTimer not found in the DOM."
-      );
-    this.gameTimerView = gameTimerView;
-
-    const headsUpDisplay = document.getElementById("headsUpDisplay");
-    if (!headsUpDisplay)
-      throw new Error(
-        "Required element with ID headsUpDisplay not found in the DOM."
-      );
-    this.headsUpDisplay = headsUpDisplay;
-
-    this.minesRemainingView = minesRemaining;
     this.settings = new GameSettings();
     this.minefield = new Minefield(
       this.settings.difficulty,
-      this.updateRemainingMinesView.bind(this)
+      this.updateRemainingMinesView.bind(this),
+      this.onGameResult.bind(this)
     );
 
     this.gameTimer = ((updateTimerView): GameTimer => {
@@ -80,11 +58,21 @@ export default class Game {
     this.minefield.onStart();
   }
 
-  onClickReset() {
+  onClickReset(){
+    this.onReset();
+  }
+
+  onReset() {
     this.gameTimer.reset();
     this.minefield.onReset();
     this.removeHudView();
     this.addControlView();
+  }
+
+  onGameResult(result: Result){
+    if(result.playerWon) alert("Congratulation, you have won.");
+    else alert("You touched a mine. Game over.")
+    this.onReset()
   }
 
   addControlView() {

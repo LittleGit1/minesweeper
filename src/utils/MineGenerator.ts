@@ -7,25 +7,38 @@ export class MineGenerator {
   iterationCount: number = 0;
   gridCellCount: number;
   mineMap: Array<Array<number>>;
+  startingX: number;
+  startingY: number;
 
-  constructor(boardSettings: BoardSettings) {
+  constructor(
+    boardSettings: BoardSettings,
+    startingX: number,
+    startingY: number
+  ) {
     this.boardSettings = boardSettings;
     this.maxMines = boardSettings.boardMines; // Total mines allowed for the difficulty level
     this.minesPlaced = 0; // Count of mines already generated
     this.iterationCount = 0; // Number of grid cells already iterated
     this.gridCellCount = boardSettings.rows * boardSettings.columns; // Total number of cells in the grid
+    this.startingX = startingX;
+    this.startingY = startingY;
     this.fillMineArray();
   }
 
   fillMineArray() {
-    this.mineMap = Array.from({ length: this.boardSettings.rows }, () =>
-      Array.from({ length: this.boardSettings.columns }, () =>
-        this.generateMine()
-      )
-    );
+    let arr: Array<Array<number>> = [];
+
+    for (let y = 0; y < this.boardSettings.rows; y++) {
+      let subarr: Array<number> = [];
+      for (let x = 0; x < this.boardSettings.columns; x++) {
+        subarr.push(this.generateMine(x, y));
+      }
+      arr.push(subarr);
+    }
+    this.mineMap = arr;
   }
 
-  destroyMineArray(){
+  destroyMineArray() {
     this.mineMap = [];
   }
 
@@ -47,9 +60,15 @@ export class MineGenerator {
     return this.mineMap[y][x];
   }
 
-  generateMine(): number {
+  generateMine(x: number, y: number): number {
     // If we've already reached the max number of mines, return 0 (not a mine)
     if (this.minesPlaced >= this.maxMines) {
+      this.iterationCount++;
+      return 0;
+    }
+
+    if (this.startingX === x && this.startingY === y) {
+      this.iterationCount++;
       return 0;
     }
 
